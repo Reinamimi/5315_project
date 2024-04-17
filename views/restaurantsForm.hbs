@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4" style="color: orange;">Restaurants</h1>
+        
+        <!-- Form Section -->
+        <div class="mt-3">
+            {{#if errors}}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {{#each errors}}
+                            <li>{{msg}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/if}}
+            <fieldset>
+                <legend>Search Restaurants</legend>
+            <form action="/api/restaurants" method="GET">
+                <div class="form-group">
+                    <label for="page">Page:</label>
+                    <input type="number" class="form-control" name="page" id="page" required>
+                </div>
+                <div class="form-group">
+                    <label for="perPage">Per Page:</label>
+                    <input type="number" class="form-control" name="perPage" id="perPage" required>
+                </div>
+                <div class="form-group">
+                    <label for="borough">Borough:</label>
+                    <input type="text" class="form-control" name="borough" id="borough">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            </fieldset>
+        </div>
+
+        <!-- Results Section -->
+        {{#if restaurants}}
+            <div class="mt-5">
+                <h3>Restaurants Results</h3>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                             <th>Name</th>
+                    <th>Borough</th>
+                    <th>Cuisine</th>
+                    <th>Street Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each restaurants}}
+                             <tr>
+                        <td>{{name}}</td>
+                        <td>{{borough}}</td>
+                        <td>{{cuisine}}</td>
+                        <td>{{address.street}}</td>
+                    </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{/if}}
+    </div>
+</body>
+</html>
